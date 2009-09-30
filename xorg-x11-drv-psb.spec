@@ -5,7 +5,7 @@
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
 Version:	0.31.0
-Release:	14%{?dist}
+Release:	15%{?dist}
 URL:		http://ppa.launchpad.net/ubuntu-mobile/ubuntu/pool/main/x/xserver-xorg-video-psb/
 Source0:	http://ppa.launchpad.net/ubuntu-mobile/ubuntu/pool/main/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
@@ -117,51 +117,54 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
-* Fri Sep 25 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-14
+* Wed Sep 30 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-15
+- change my email address in changelog to correct one for Fusion
+
+* Fri Sep 25 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-14
 - switch to requiring kmod-psb not akmod-psb now we're in rpmfusion
 
-* Fri Aug 28 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-13
+* Fri Aug 28 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-13
 - update X server 1.7 patch with a further fix (thanks ajax)
 
-* Fri Aug 28 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-12
+* Fri Aug 28 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-12
 - try and patch for X server 1.7 (F12)
 
-* Mon Aug 24 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-11
+* Mon Aug 24 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-11
 - correct exclusivearch for rpmfusion buildsystem
 
-* Thu Aug 20 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-10
+* Thu Aug 20 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-10
 - exclusivearch ix86 (there's no 64-bit poulsbo hardware)
 - mark config file as config
 - fix nvidia reference in comments of init script
 
-* Wed Aug 19 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-9
+* Wed Aug 19 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-9
 - add another PCI ID to the modprobe config file
 
-* Wed Aug 19 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-8
+* Wed Aug 19 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-8
 - fix up manpage character set
 
-* Wed Aug 19 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-7
+* Wed Aug 19 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-7
 - drop greedy.patch as it doesn't seem to work (can't work out why)
 - add xorg.conf handling initscript and script based on the ones used
   in NVIDIA and ATI packages, including setting migration heuristic
   in xorg.conf since the patch didn't work
 
-* Fri Aug 14 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-6
+* Fri Aug 14 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-6
 - add greedy.patch: default to greedy migration heuristic (gives
   better performance for multiple testers)
 - add ignoreacpi.patch: default to ignoreACPI (required to avoid X
   crashing for multiple testers)
 
-* Tue Aug 11 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-5
+* Tue Aug 11 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-5
 - patch build to find newly relocated libdrm-poulsbo
 
-* Mon Aug 10 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-4
+* Mon Aug 10 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-4
 - add a modprobe config file to make the kernel module auto-load (in
   this package as it's doing the job of psb-kmod-common)
 
-* Mon Aug 10 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-3
+* Mon Aug 10 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-3
 - Require akmod-psb not kmod-psb so I don't have to keep rebuilding
 
-* Mon Aug 10 2009 Adam Williamson <awilliam@redhat.com> - 0.31.0-2
+* Mon Aug 10 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-2
 - Begin changelog tracking
 
