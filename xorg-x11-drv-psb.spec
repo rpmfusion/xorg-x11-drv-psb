@@ -4,10 +4,10 @@
 
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
-Version:	0.31.0
-Release:	15%{?dist}
-URL:		http://ppa.launchpad.net/ubuntu-mobile/ubuntu/pool/main/x/xserver-xorg-video-psb/
-Source0:	http://ppa.launchpad.net/ubuntu-mobile/ubuntu/pool/main/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
+Version:	0.32.0
+Release:	1%{?dist}
+URL:		http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/
+Source0:	http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
 # because the freaking module's too broken to include its own modalias
 Source1:	poulsbo-modprobe.conf
@@ -18,8 +18,10 @@ Source3:	psb-init
 Patch0:		xorg-x11-drv-psb-0.31.0-libdrm.patch
 # Don't do ACPI detection by default
 Patch1:		xorg-x11-drv-psb-0.31.0-ignoreacpi.patch
-# Patch for X server 1.7
+# Attempted patch for X server 1.7
 Patch2:		xorg-x11-drv-psb-0.31.0-xserver17.patch
+# From UNR: disable LidTimer option to suppress polling
+Patch3:		01_disable_lid_timer.patch
 License:	MIT
 Group:		User Interface/X Hardware Support
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -65,6 +67,7 @@ submission to the main Fedora repositories.
 %patch0 -p1 -b .libdrm
 %patch1 -p1 -b .ignoreacpi
 %patch2 -p1 -b .xserver17
+%patch3 -p1 -b .lidtimer
 
 iconv -f iso-8859-15 -t utf-8 -o man/psb.man.utf8 man/psb.man && mv man/psb.man.utf8 man/psb.man
 
@@ -117,6 +120,11 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
+* Thu Dec 3 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-1
+- newer upstream release 0.32.0 (fixes a "single SDVO jitter issue")
+- add 01_disable_lid_timer.patch from UNR: disable LidTimer option
+  by default to suppress polling for lid status every second
+
 * Wed Sep 30 2009 Adam Williamson <adamwill AT shaw DOT ca> - 0.31.0-15
 - change my email address in changelog to correct one for Fusion
 
