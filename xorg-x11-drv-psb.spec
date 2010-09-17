@@ -5,7 +5,7 @@
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
 Version:	0.32.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 URL:		http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/
 Source0:	http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
@@ -38,6 +38,12 @@ Patch9:		xorg-x11-drv-psb-0.32.0-mixed.patch
 Patch10:	xorg-x11-drv-psb-0.32.0-xv.patch
 # From Yves - fix blank screen when rotating 90 degrees
 Patch11:	xorg-x11-drv-psb-0.32.0-rotate.patch
+# From Lubomir Rintel - various fixes for X server 1.9
+Patch12:	xorg-x11-drv-psb-0.32.0-root_window.patch
+Patch13:	xorg-x11-drv-psb-0.32.0-changegc.patch
+Patch14:	xorg-x11-drv-psb-0.32.0-mibank.patch
+Patch15:	xorg-x11-drv-psb-0.32.0-symbols.patch
+Patch16:	xorg-x11-drv-psb-0.32.0-null.patch
 License:	MIT
 Group:		User Interface/X Hardware Support
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -92,6 +98,11 @@ submission to the main Fedora repositories.
 %patch9 -p1 -b .mixed
 %patch10 -p1 -b .xv
 %patch11 -p1 -b .rotate
+%patch12 -p1 -b .rootwindow
+%patch13 -p1 -b .changegc
+%patch14 -p1 -b .mibank
+%patch15 -p1 -b .symbols
+%patch16 -p1 -b .null
 
 
 iconv -f iso-8859-15 -t utf-8 -o man/psb.man.utf8 man/psb.man && mv man/psb.man.utf8 man/psb.man
@@ -146,6 +157,9 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
+* Fri Sep 17 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-5
+- add various patches from Lubomir Rintel for F14 compatibility
+
 * Thu Jul 22 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-4
 - add rotate.patch, from Yves: fixes 90 degree rotation
 
