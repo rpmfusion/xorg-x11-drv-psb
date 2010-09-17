@@ -1,0 +1,40 @@
+--- xserver-xorg-video-psb-0.32.1/src/psb_outputs.c.orig	2010-09-16 10:01:25.836640004 +0200
++++ xserver-xorg-video-psb-0.32.1/src/psb_outputs.c	2010-09-16 10:02:20.092640004 +0200
+@@ -64,6 +64,28 @@ psbOutputCommit(xf86OutputPtr output)
+     output->funcs->dpms(output, DPMSModeOn);
+ }
+ 
++static int
++DDC_checksum_psb(unsigned char *block, int len)
++{
++    int i, result = 0;
++    int not_null = 0;
++    
++    for (i=0;i<len;i++) {
++        not_null |= block[i];
++        result += block[i];
++    }
++    
++#ifdef DEBUG
++    if (result & 0xFF) ErrorF("DDC checksum not correct\n");
++    if (!not_null) ErrorF("DDC read all Null\n");
++#endif
++
++    /* catch the trivial case where all bytes are 0 */
++    if (!not_null) return 1;
++
++    return (result&0xFF);
++}
++
+ /*Add this function to get the EDID data from DDC bus, got the code from Xserver Jamesx*/
+ unsigned char *
+ psbDDCRead_DDC2(int scrnIndex, I2CBusPtr pBus, int start, int len)
+@@ -107,7 +129,7 @@ psbDDCRead_DDC2(int scrnIndex, I2CBusPtr
+ 		       * (len));
+     for (i = 0; i < 4 /*RETRIES*/; i++) {
+ 	if (xf86I2CWriteRead(dev, W_Buffer, w_bytes, R_Buffer, len)) {
+-	    if (!DDC_checksum(R_Buffer, len))
++	    if (!DDC_checksum_psb(R_Buffer, len))
+ 		return R_Buffer;
+ 	}
+     }

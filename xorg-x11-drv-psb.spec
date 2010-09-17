@@ -38,6 +38,8 @@ Patch9:		xorg-x11-drv-psb-0.32.0-mixed.patch
 Patch10:	xorg-x11-drv-psb-0.32.0-xv.patch
 # From Yves - fix blank screen when rotating 90 degrees
 Patch11:	xorg-x11-drv-psb-0.32.0-rotate.patch
+# From Joakim Plate - fixes HDMI output
+Patch12:	xorg-x11-drv-psb-0.32.0-hdmi.patch
 License:	MIT
 Group:		User Interface/X Hardware Support
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -92,7 +94,7 @@ submission to the main Fedora repositories.
 %patch9 -p1 -b .mixed
 %patch10 -p1 -b .xv
 %patch11 -p1 -b .rotate
-
+%patch12 -p1 -b .hdmi
 
 iconv -f iso-8859-15 -t utf-8 -o man/psb.man.utf8 man/psb.man && mv man/psb.man.utf8 man/psb.man
 
@@ -146,6 +148,9 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
+* Fri Sep 18 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-5
+- add hdmi.patch, from Joakim Plate: fix HDMI output
+
 * Thu Jul 22 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-4
 - add rotate.patch, from Yves: fixes 90 degree rotation
 
