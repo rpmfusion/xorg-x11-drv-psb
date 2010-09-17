@@ -5,7 +5,7 @@
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
 Version:	0.32.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 URL:		http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/
 Source0:	http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
