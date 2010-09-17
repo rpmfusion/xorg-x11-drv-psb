@@ -1,0 +1,24 @@
+--- xserver-xorg-video-psb-0.32.0/src/psb_crtc.c	2009-05-11 18:37:53.000000000 -0700
++++ xserver-xorg-video-psb-0.32.0/src/psb_crtc.c.new	2010-07-22 14:27:54.528657277 -0700
+@@ -431,7 +431,9 @@
+ 			if (bPlaneBEnabled)
+ 			{   
+ 				//current mode dot clock, HZ
+-				DotClockB = output->crtc->mode.Clock * 1000 / WM_DOTCLOCK_DIVISOR;
++ 				if( output->crtc ){
++ 					DotClockB = output->crtc->mode.Clock * 1000 / WM_DOTCLOCK_DIVISOR;
++ 				}
+ 				BPPB = output->scrn->bitsPerPixel;
+ 			}
+ 		}
+@@ -440,7 +442,9 @@
+ 		{
+ 			if (bPlaneAEnabled)
+ 			{
+-				DotClockA = output->crtc->mode.Clock * 1000 / WM_DOTCLOCK_DIVISOR;
++ 				if( output->crtc ){
++ 					DotClockA = output->crtc->mode.Clock * 1000 / WM_DOTCLOCK_DIVISOR;
++ 				}
+ 				BPPA = output->scrn->bitsPerPixel;
+ 			}
+ 		}

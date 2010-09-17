@@ -5,7 +5,7 @@
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
 Version:	0.32.0
-Release:	3%{?dist}
+Release:	4%{?dist}
 URL:		http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/
 Source0:	http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
@@ -32,8 +32,12 @@ Patch7:		xorg-x11-drv-psb-0.31.0-stubs.patch
 # Fix up an include of the internal exa.h rather than the public one
 # Thanks Eric Piel
 Patch8:		xorg-x11-drv-psb-0.32.0-exa_header.patch
-# Use exa_mixed not classic - Yves De Muyter
-Patch9:		xorg-x11-drv-psb-0.31.0-mixed.patch
+# From Yves De Muyter - fix problems with using 3D and video playback
+Patch9:		xorg-x11-drv-psb-0.32.0-mixed.patch
+# From Yves - fix a problem with Xv
+Patch10:	xorg-x11-drv-psb-0.32.0-xv.patch
+# From Yves - fix blank screen when rotating 90 degrees
+Patch11:	xorg-x11-drv-psb-0.32.0-rotate.patch
 License:	MIT
 Group:		User Interface/X Hardware Support
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -84,8 +88,11 @@ submission to the main Fedora repositories.
 %patch5 -p1 -b .unused
 %patch6 -p1 -b .assert
 %patch7 -p1 -b .addinfo
-%patch8 -p1 -b .exaheader
+%patch8 -p1 -b .header
 %patch9 -p1 -b .mixed
+%patch10 -p1 -b .xv
+%patch11 -p1 -b .rotate
+
 
 iconv -f iso-8859-15 -t utf-8 -o man/psb.man.utf8 man/psb.man && mv man/psb.man.utf8 man/psb.man
 
@@ -139,6 +146,13 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
+* Thu Jul 22 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-4
+- add rotate.patch, from Yves: fixes 90 degree rotation
+
+* Thu Jul 15 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-3
+- add patches from Yves de Muyter, Ubuntu community and Eric Piel for
+  later X compatibility
+
 * Fri May 21 2010 Adam Williamson <adamwill AT shaw DOT ca> - 0.32.0-2
 - add several patches from Olivier Blin at Mandriva for later X compatibility
 
