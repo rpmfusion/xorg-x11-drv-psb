@@ -5,7 +5,7 @@
 Summary:	Intel GMA500 (Poulsbo) video driver
 Name:		xorg-x11-drv-psb
 Version:	0.32.0
-Release:	6%{?dist}
+Release:	7%{?dist}
 URL:		http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/
 Source0:	http://netbook-remix.archive.canonical.com/updates/pool/public/x/xserver-xorg-video-psb/%{tarball}_%{version}.orig.tar.gz
 # Causes psb module to be loaded when a GMA500 adapter PCI ID is found
@@ -66,7 +66,7 @@ BuildRequires:	mesa-libGL-devel
 BuildRequires:	freeglut-devel
 
 Requires:	xorg-x11-server-Xorg >= 1.1.0
-Requires:	kmod-psb
+Requires:	psb-kmod
 Requires:	psb-firmware
 Requires:	xpsb-glx
 Requires:	libdrm-poulsbo
@@ -157,6 +157,10 @@ fi ||:
 %{_mandir}/man4/*.4*
 
 %changelog
+* Mon Feb 14 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.32.0-7
+- Switch Requires kmod-psb -> psb-kmod
+  http://bugzilla.rpmfusion.org/show_bug.cgi?id=1186#c7
+
 * Thu Oct 14 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.32.0-6
 - Rebuilt for gcc bug
 
